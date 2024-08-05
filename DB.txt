@@ -1,0 +1,36 @@
+CREATE TABLE categories (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE wallets (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    balance FLOAT NOT NULL DEFAULT 0,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE records (
+    id SERIAL PRIMARY KEY,
+    wallet_id INT NOT NULL,
+    amount FLOAT NOT NULL,
+    transaction_type VARCHAR(10) NOT NULL, -- "income" or "expense"
+    category_id INT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (wallet_id) REFERENCES wallets (id),
+    FOREIGN KEY (category_id) REFERENCES categories (id)
+);
+
+CREATE TABLE transfers (
+    id SERIAL PRIMARY KEY,
+    from_wallet_id INT NOT NULL,
+    to_wallet_id INT NOT NULL,
+    amount FLOAT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (from_wallet_id) REFERENCES wallets (id),
+    FOREIGN KEY (to_wallet_id) REFERENCES wallets (id)
+);
