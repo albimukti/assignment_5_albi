@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	dsn := "host=localhost user=localhost password=albi123 dbname=DB_tranning port=5432 sslmode=disable"
+	dsn := "host=localhost user=postgres password=albi123 dbname=DB_tranning port=5432 sslmode=disable"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
