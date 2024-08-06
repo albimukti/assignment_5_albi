@@ -30,7 +30,7 @@ func (h *RecordHandler) CreateRecord(c *gin.Context) {
 }
 
 func (h *RecordHandler) ListRecordsByWalletID(c *gin.Context) {
-	walletID := c.Param("walletID")
+	walletID := c.Param("ID")
 	records, err := h.service.ListRecordsByWalletID(walletID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -40,7 +40,7 @@ func (h *RecordHandler) ListRecordsByWalletID(c *gin.Context) {
 }
 
 func (h *RecordHandler) ListRecordsByTime(c *gin.Context) {
-	walletID := c.Param("walletID")
+	walletID := c.Param("ID")
 	startTime := c.Query("start_time")
 	endTime := c.Query("end_time")
 	records, err := h.service.ListRecordsByTime(walletID, startTime, endTime)

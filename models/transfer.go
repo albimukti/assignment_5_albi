@@ -3,7 +3,7 @@ package model
 import "time"
 
 type Transfer struct {
-	ID           uint      `gorm:"primaryKey"`
+	ID           uint      `json:"primaryKey"`
 	FromWalletID uint      `json:"from_wallet_id"`
 	ToWalletID   uint      `json:"to_wallet_id"`
 	Amount       float64   `json:"amount"`
